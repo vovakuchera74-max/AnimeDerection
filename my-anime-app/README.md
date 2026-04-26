@@ -1,73 +1,120 @@
-# React + TypeScript + Vite
+# 爆 BLAST — Anime Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Сайт для пошуку та відстеження аніме з використанням публічного Jikan API
 
-Currently, two official plugins are available:
+![alt text](image.png)
+![alt text](image-1.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌟 Можливості
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔍 **Пошук аніме** — миттєвий пошук по назві
+- 🎭 **Фільтрація по жанрах** — Shounen, Isekai, Mecha, Drama, Seinen
+- 📄 **Сторінка аніме** — детальна інформація: опис, рейтинг, жанри, кількість серій, трейлер
+- ❤️ **Улюблене** — додавай аніме в список обраних
+- 📋 **Watchlist** — плануй що дивитись
+- 🌙 **Темна/світла тема** — перемикання теми
+- 📱 **Адаптивний дизайн** — працює на всіх екранах
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Стек
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Технологія     | Призначення |
+|----------------|---------------|
+| React 18       | UI бібліотека |
+| TypeScript     | Типізація |
+| Vite           | Збірник проекту |
+| React Router   | Навігація |
+| TanStack Query | Запити до API та кешування |
+| Zustand        | Глобальний стан |
+| SCSS Modules   | Стилізація |
+| Jikan API      | Дані про аніме |
+| JSON Server    | Локальна база даних (обране, watchlist) |
+| Lucide React   | Іконки |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Запуск проекту
+
+### 1. Клонуй репозиторій
+
+```bash
+git clone https://github.com/vovakuchera74-max/AnimeDerection.git
+cd AnimeDerection/my-anime-app
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Створи `.env` файл
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Створи файл .env в корені проекту
+VITE_API_URL=http://localhost:3001
 ```
+
+### 3. Запусти проект
+
+Потрібно запустити **два термінали одночасно**:
+
+**Термінал 1 — JSON Server (база даних):**
+```bash
+cd my-anime-app
+npm run server
+```
+
+**Термінал 2 — React додаток:**
+```bash
+cd my-anime-app
+npm run dev
+```
+
+### 4. Відкрий в браузері
+
+```
+http://localhost:5173
+```
+
+---
+
+## 📁 Структура проекту
+
+```
+src/
+├── api/              # Запити до API
+│   ├── jikanApi.ts       # Jikan API
+│   └── FavoriteWatchlist.ts  # JSON Server
+├── components/       # Компоненти
+│   ├── AnimeCard.tsx
+│   ├── Header.tsx
+│   ├── LibraryCard.tsx
+│   ├── Loader.tsx
+│   └── Search.tsx
+├── pages/            # Сторінки
+│   ├── Home.tsx
+│   ├── AnimeDetails.tsx
+│   └── Faborites.tsx
+├── store/            # Zustand стор
+│   └── Store.tsx
+├── styles/           # SCSS стилі
+├── types/            # TypeScript типи
+│   └── anime.types.ts
+└── hooks/            # Кастомні хуки
+    └── useDebounce.ts
+```
+
+---
+
+## 📝 Скрипти
+
+```bash
+npm run dev      # Запуск React додатку
+npm run server   # Запуск JSON Server
+npm run build    # Збірка для продакшну
+```
+
+---
+
+## 🔗 API
+
+Проект використовує безкоштовний [Jikan API](https://jikan.moe/) — неофіційний MyAnimeList API. Ліміт запитів: 3 запити/сек.
