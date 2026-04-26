@@ -1,0 +1,206 @@
+.animeDetailsPage{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.animeContentWrapper{
+    display: grid;
+    grid-template-columns:300px 1fr; 
+    gap: 30px;
+    padding:10px 10px 10px 10px ;
+    
+  
+
+}
+.imgWithFawPlan{
+     width: 300px;
+}
+.posterContainer{
+    width: 100%;          
+  aspect-ratio: 2 / 3;
+  background-color: #252525;
+  overflow: hidden;   
+   border-radius: 12px;
+
+}
+.animePoster{
+     width: 100%;      // ← було 300px, тепер розтягується на весь блок
+  height: 100%;
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    
+     object-fit: cover;
+    
+}
+.fawPlan{
+    display: flex;
+    justify-content: space-evenly;
+    padding:10px;
+}
+.btnFaw, .btnPlan {
+ 
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 50px; 
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2b2b2b; 
+    color: white;
+
+    transition: transform 0.2s, background-color 0.2s;
+
+    &:hover {
+        background-color: #ff4d4f; // Наприклад, червоний для сердечка
+        transform: scale(1.1); // Легке збільшення
+    }
+}
+.animeMainTitle{
+    padding:10px;
+}
+.infoGridContainer {
+  display: grid;
+  // Якщо хочеш 2fr і 1fr, просто запиши це сюди:
+  grid-template-columns: 2fr 1fr; 
+  gap: 30px; // Відстань між блоками
+  align-items: start; // Щоб блоки не розтягувалися по висоті, якщо в одному менше тексту
+  padding: 0 0 30px 0;
+}
+.ratingContainer{
+    display: flex;
+    gap: 10px;
+    padding: 10px 0 0 0;
+   
+}
+.scoreValue {
+  font-size: 26px;     // Підженіть під розмір іконки (у нас іконка 24px)
+  font-weight: 700;    // Жирний шрифт робить цифру "масивнішою"
+  line-height: 1;      // Прибирає зайві відступи зверху/знизу шрифту
+ 
+}
+.starsWrapper {
+  display: flex;
+  align-items: center; // Центруємо самі зірки всередині контейнера
+  
+  svg {
+    display: block; // Важливо! Прибирає невидимий "флет", який іноді додають іконки
+  }
+}
+.infoLeft{
+    padding: 10px 0 0 0;
+    line-height: 1.5;
+}
+.blockTitle{
+  border-left: 4px solid #4a90e2; // Синя риска збоку додає стилю
+  padding-left: 15px;
+  font-size: 22px;
+}
+.sectionTitle{
+     border-left: 4px solid #4a90e2; // Синя риска збоку додає стилю
+  padding-left: 15px;
+  font-size: 22px;
+  line-height: 1.6;
+}
+.synopsisText{
+    line-height: 1.5;
+    padding-top: 15px;
+    text-align:justify;
+    font-size: 18px;
+     word-break: break-word; // ← довгі слова переносяться
+  overflow-wrap: break-word;
+}
+.videoSection{
+    grid-column: 1 / -1;
+    width: 100%;
+  margin-top: 40px;
+}
+.videoContainer {
+  margin-top:15px ;
+  width: 100%;
+  aspect-ratio: 16 / 9; // Це стандарт для відео, він сам тримає пропорцію
+}
+
+.videoIframe {
+  width: 100%;
+  height: 100%; // Обов'язково додайте, щоб iframe заповнив контейнер
+  border-radius: 12px; // Щоб краї не були гострими, як на макеті
+  border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.infoLabel{
+    font-size: 20px;
+}
+.infoItem{
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 0 0 4px 0;
+    gap: 12px
+}
+.genreTag{
+   
+    padding: 0 7px;           // Трохи більше "дихання" всередині
+    margin-right: 8px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+
+
+    cursor: pointer;
+     transition: transform 0.2s, background-color 0.2s;
+    &:hover{
+        background-color: #4a90e2;
+        transform: translateY(-2px);
+
+    }
+}
+// Планшет — Rating іде під Information
+@media (max-width: 950px) {
+  .infoGridContainer {
+    grid-template-columns: 1fr; // ← один під одним
+  }
+}
+
+.opsBlocMobile {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  // Ховаємо оригінальний
+  .opsBloc {
+    display: none;
+  }
+
+  // Показуємо мобільний
+  .opsBlocMobile {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+// Маленький телефон
+@media (max-width: 705px) {
+  .animeContentWrapper {
+    grid-template-columns: 1fr;
+  }
+    .opsBlocMobile {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .imgWithFawPlan {
+   
+    margin: 0 auto;  // ← по центру
+  }
+  
+}.animeInfoSection {
+  min-width: 0; // ← текст не вилазить за межі grid колонки
+  overflow: hidden;
+}
+.genresList {
+  display: flex;
+  flex-wrap: wrap; // ← переносить жанри на новий рядок
+
+}

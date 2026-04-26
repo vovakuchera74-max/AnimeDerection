@@ -1,0 +1,23 @@
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1; // ДОДАТИ ЦЕ — тепер він "виштовхне" спінер на центр екрана
+  padding: 20px 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1); /* Світле кільце */
+  border-left-color: #ff0055; /* Акцентний колір (можеш змінити на свій) */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

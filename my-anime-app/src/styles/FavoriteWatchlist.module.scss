@@ -1,0 +1,36 @@
+.FavoriteWatchlist{
+    display: grid;
+    grid-template-columns:1fr 1fr; 
+    gap: 30px;
+    padding:20px 10px 10px 10px ;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+.Favorite_header ,.Watchlist_header {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 13px 0;
+  color: aqua; // ← додай крапку з комою!
+
+    
+}
+.Favorite_card ,.Watchlist_card {
+  display: flex;
+  flex-direction: column; // ← картки одна під одною
+  gap: 10px; // ← відступ між картками
+  padding: 8px;
+}
+.Favorite, .Watchlist {
+  background: #1e1e1e;
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 400px; // ← щоб блок був великим навіть якщо мало аніме
+}
+@media(max-width:900px){
+  .FavoriteWatchlist{
+ grid-template-columns:1fr;
+  }
+}

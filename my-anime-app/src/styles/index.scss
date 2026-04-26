@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+@mixin ds-flex(){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@mixin size($height ,$width){
+    width: $width;
+    height: $height;
+}
+.Header{
+    @include ds-flex();
+   
+    position: sticky;
+    top: 0;
+    background-color: #1f1f1f; // Статичний темний колір
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); // Тінь, щоб відділити від контенту
+    border-bottom: 1px solid #333; // Чітка лінія знизу
+    padding: 10px 30px;
+    z-index: 1000;
+
+}
+
+.logo {
+    height: 40px; // Фіксуємо висоту
+    width: auto;  // Ширина підлаштується автоматично під пропорції картинки
+    object-fit: contain;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05); // Легкий ефект при наведенні
+    }
+}
+.Smallogo{
+    
+    display: none;
+    height: 40px; // Фіксуємо висоту
+    width: auto;  // Ширина підлаштується автоматично під пропорції картинки
+    object-fit: contain;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05); // Легкий ефект при наведенні
+    }
+}
+@media (max-width: 458px) {
+  .logo {
+    display: none; // ← ховаємо велике
+  }
+
+  .Smallogo {
+    display: block; // ← показуємо маленьке
+  }
+}
+.Input {
+    // Робимо обгортку відносною, щоб лупа позиціонувалася всередині неї
+    position: relative; 
+    display: flex;
+    align-items: center;
+    flex: 1;           // ← займає вільний простір
+    max-width: 700px;
+
+    // Це наша "лупа" без використання картинок чи бібліотек
+    &::before {
+        content: '🔍'; 
+        position: absolute;
+        left: 15px; // Відсовуємо від лівого краю
+        font-size: 16px;
+        pointer-events: none; // Важливо: щоб лупа не блокувала клік по інпуту
+    }
+
+    input {
+        width: 100%; 
+        height: 40px;
+        border-radius: 25px; 
+        border: none;
+        background-color: #2b2b2b; 
+        color: white;
+
+        padding: 0 15px 0 45px; 
+        outline: none;
+
+    }
+    
+}
+.theme-toggle-track {
+    @include size(26px, 55px); // Трохи збільшимо для зручності
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 10px; // Внутрішній відступ, щоб кружечок не торкався країв
+    border: 1px solid #444;
+    
+    // Градієнт: перші 50% темні, решта 50% світлі
+    background: linear-gradient(90deg, #1a1a1a 50%, #f1f1f1 50%);
+    
+    transition: background 0.3s ease;
+}
+
+.theme-toggle-thumb {
+    @include size(18px, 18px);
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5); 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    
+
+    &.active {
+       
+        transform: translateX(39px);
+        background-color: #ffd700; 
+    }
+}
+.app-wrapper.dark {
+   display: flex;           // ДОДАТИ ЦЕ
+   flex-direction: column;  // ДОДАТИ ЦЕ
+   background-color: #1a1a1a;
+   color: white;
+   min-height: 100vh;
+}
+
+.app-wrapper.light {
+   display: flex;           // ДОДАТИ ЦЕ
+   flex-direction: column;  // ДОДАТИ ЦЕ
+   background-color: #f5f5f5;
+   color: #333;
+   min-height: 100vh;
+}
+main {
+    flex: 1; // Змушує main розтягнутися до самого низу
+    display: flex;
+    flex-direction: column;
+}
+.dropdown-container {
+  position: relative; 
+  
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+     right: 0;  // ← було left: 0, тепер right: 0
+    left: auto;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    padding: 10px;
+    list-style: none;
+    min-width: 60px;
+    padding: 8px 0;
+
+    li {
+      margin: 5px 0;
+     
+      
+      a {
+        width: 80px;
+        display: flex; 
+        flex: 1;
+        justify-content: center;
+        text-decoration: none;
+        padding: 10px 15px; 
+        color: white;
+        &:hover {
+                background-color: #3d3d3d; 
+            }
+      }
+    }
+  }
+}
+.nav-btn{
+    min-width: 110px;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    cursor: pointer;
+    
+    height: 40px;
+    color: #f1f1f1;
+    font-size: 30px;
+    padding: 0 0 10px 0px;
+    border: none;
+    transition: background-color 0.3s ease; // Плавна зміна кольору
+    &:hover {
+        background-color: #3d3d3d; // Трохи світлішає при наведенні
+    }
+
+}
+.genre-item.active {
+  color: green;
+}
+.nav-btn2{
+    cursor: pointer;
+    min-width: 110px;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    
+    height: 40px;
+    color: #f1f1f1;
+    font-size: 20px;
+    padding: 7px 0 10px 0px;
+    border: none;
+    transition: background-color 0.3s ease; // Плавна зміна кольору
+    &:hover {
+        background-color: #3d3d3d; // Трохи світлішає при наведенні
+    }
+
+}
+.genre-item{
+    display: block; 
+        text-decoration: none;
+        padding: 10px 15px; 
+        color: white;
+        &:hover {
+                background-color: #3d3d3d; 
+            }
+}
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; // Ось цей параметр регулює відстань між кнопками та тоґлом
+}
+.home-container {
+  padding: 40px 20px;
+  min-height: 100vh;
+  
+}
+
+.anime-grid {
+  display: grid;
+  // Автоматичні колонки: мінімум 200px, максимум — скільки влізе
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.AnimeCard {
+  display: flex;
+  flex-direction: column; // Елементи йдуть один під одним
+  text-decoration: none;  // Прибираємо підкреслення посилання
+  color: white;         // Текст бере колір теми, а не стає синім
+  background: #252525;    // Темний фон (для темної теми)
+  border-radius: 12px;    // Заокруглені кути
+  overflow: hidden;       // Щоб картинка не вилазила за кути
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px); // Картка підстрибує при наведенні
+  }
+  h3{
+    white-space: nowrap;    // Забороняємо перенос
+    overflow: hidden;       // Обрізаємо все, що не влазить
+    text-overflow: ellipsis; // Додаємо багатокрапку
+    margin-top: 10px;
+    font-size: 1rem;
+     padding: 0px 5px;
+  }
+
+}
+.AnimeImg{
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.Сard-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    align-items: center;
+}
+.mobile-only {
+ display: none;
+ 
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1028px) {
+ 
+  .header-actions > .theme-toggle-track {
+    display: none;
+  }
+
+ 
+  .mobile-only {
+    display: flex;         
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px;
+  }
+}
+@media (max-width: 1028px) {
+  .Header {
+    padding: 10px 15px; // ← було 10px 30px
+    gap: 10px; // ← відступ між елементами
+  }
+}
+
+@media (max-width: 600px) {
+  .Header {
+    padding: 10px 6px; // ← ще менше на маленьких
+
+  }
+}
+.searchToggle {
+  display: none; // ← ховаємо на великих
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  padding-left: 6px;
+      transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.5); // Легкий ефект при наведенні
+    }
+}
+
+@media (max-width: 608px) {
+  // Ховаємо ::before лупу бо тепер є кнопка
+  .Input::before {
+    display: none;
+  }
+
+  .searchToggle {
+    display: block; // ← показуємо кнопку
+  }
+
+  .Input input {
+    display: none; // ← ховаємо input
+    position: fixed; // ← фіксований щоб був поверх всього
+    top: 60px;       // ← під хедером
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+    padding: 12px 20px;
+    z-index: 999;
+    background-color: #2b2b2b;
+
+    &.mobileOpen {
+      display: block; // ← показуємо при кліку
+       border-bottom: 1px solid #444; // ← лінія знизу відділяє від контенту
+  font-size: 16px;
+  
+    }
+  }
+}

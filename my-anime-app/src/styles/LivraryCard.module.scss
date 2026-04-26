@@ -1,0 +1,55 @@
+.card {
+  display: grid;
+  grid-template-columns: auto 1fr auto; // ← img | info | rating
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  background: #252525;
+  transition: transform 0.2s;
+  cursor: pointer;
+
+    &:hover {
+        
+        transform: scale(1.07); // Легке збільшення
+    }
+}
+
+.image {
+  width: 90px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column; // ← назва зверху, серії знизу
+  gap: 7px;
+  min-width: 0;
+}
+
+.title {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;     // ← не переносить на новий рядок
+  overflow: hidden;        // ← обрізає текст
+  text-overflow: ellipsis; // ← додає "..." в кінці
+}
+
+.episodes {
+  font-size: 20px;
+  color: #888;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column; // ← зірка зверху, цифра знизу
+  align-items: center;
+  gap: 10px;
+}
+.score{
+     font-size: 20px;
+     color: white;
+}

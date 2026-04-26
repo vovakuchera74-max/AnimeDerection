@@ -1,0 +1,32 @@
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { AnimeDetails } from './pages/AnimeDetails';
+import { Header } from './components/Header';
+import {FavoriteWatchlist} from './pages/Faborites.tsx'
+
+import { useAnimeStore } from "./store/Store.tsx";
+
+export default function App() {
+  const isDark = useAnimeStore((state) => state.isDark);
+  
+  // Функція для зміни теми
+  
+
+  return (
+    <div className={`app-wrapper ${isDark ? 'dark' : 'light'}`}>
+      {/* Передаємо функцію зміни теми в Header */}
+      <Header  />
+
+      <main>
+        <Routes>
+          {/* Головна сторінка */}
+          <Route path="/" element={<Home />} />
+          <Route path="/FavoriteWatchlist" element={<FavoriteWatchlist />} />
+
+          {/* Сторінка конкретного аніме */}
+          <Route path="/anime/:id" element={<AnimeDetails />} />
+        </Routes>
+      </main>
+    </div>
+  );
+}
