@@ -4,7 +4,8 @@ import smallogo from "../assets/smallog.png"
 import '../styles/index.scss';
 import { useState } from 'react';
 import { useAnimeStore } from "../store/Store.tsx";
-import { Search } from "./Search.tsx";
+import { Search1 } from "./Search.tsx";
+import { Sword, Wand2, Drama , Cpu, Wine,LayoutGrid,BookMarked } from 'lucide-react';
 
 
 export const Header = ()=>{
@@ -37,25 +38,39 @@ const toggleGenres = () => {
             <Link to={"/"}>
             <img src={smallogo} alt="SpiritBloom Logo" className="Smallogo" />
             </Link>
-            <Search></Search>
+            <Search1></Search1>
 
 
 <div className="header-actions">
             <div className="dropdown-container">
   {/* Додаємо клік на кнопку */}
   <button onClick={toggleGenres} className="nav-btn2">
-    Ganre
+    Filter 
   </button>
 
   {/* Показуємо список тільки якщо isOpen === true */}
   {isGenresOpen && (
    <ul className="dropdown-menu">
-  <li><span onClick={() => { setGenre(null); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === null ? 'active' : ''}`}>All</span></li>
-  <li><span onClick={() => { setGenre(27); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 27 ? 'active' : ''}`}>⚔️Shounen</span></li>
-  <li><span onClick={() => { setGenre(62); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 62 ? 'active' : ''}`}>✨Isekai</span></li>
-  <li><span onClick={() => { setGenre(18); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 18 ? 'active' : ''}`}>🤖Mecha</span></li>
-  <li><span onClick={() => { setGenre(8); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 8 ? 'active' : ''}`}>🎭Drama</span></li>
-  <li><span onClick={() => { setGenre(41); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 41 ? 'active' : ''}`}>🩸Seinen</span></li>
+    <li><span onClick={() => { setGenre(null); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === null ? 'active' : ''}`}><LayoutGrid size={16} /> All</span></li>
+ <li><span onClick={() => { setGenre(27); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 27 ? 'active' : ''}`}>
+  <Sword size={16} /> Shounen
+</span></li>
+
+<li><span onClick={() => { setGenre(62); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 62 ? 'active' : ''}`}>
+  <Wand2 size={16} /> Isekai
+</span></li>
+
+<li><span onClick={() => { setGenre(18); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 18 ? 'active' : ''}`}>
+  <Cpu size={16} /> Mecha
+</span></li>
+
+<li><span onClick={() => { setGenre(8); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 8 ? 'active' : ''}`}>
+  <Drama size={16} /> Drama
+</span></li>
+
+<li><span onClick={() => { setGenre(41); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === 41 ? 'active' : ''}`}>
+  <Wine size={16} /> Seinen
+</span></li>
 </ul>
   )}
 </div>
@@ -72,7 +87,7 @@ const toggleGenres = () => {
   {isOpen && (
     <ul className="dropdown-menu">
       <li>
-        <Link to="/FavoriteWatchlist" onClick={() => setIsOpen(false)}>⭐List</Link>
+        <Link to="/FavoriteWatchlist" className="List_Book" onClick={() => setIsOpen(false)}> <BookMarked size={18} /> List</Link>
       </li>
      <li className="mobile-only">
       <div className="theme-toggle-track" onClick={toggleTheme}>

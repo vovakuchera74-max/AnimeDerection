@@ -1,7 +1,9 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Rajdhani', sans-serif;
 }
+
 @mixin ds-flex(){
     display: flex;
     justify-content: space-between;
@@ -61,16 +63,14 @@
     display: flex;
     align-items: center;
     flex: 1;           // ← займає вільний простір
-    max-width: 700px;
+    max-width: 500px;
+    .searchIcon1 {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+}
 
     // Це наша "лупа" без використання картинок чи бібліотек
-    &::before {
-        content: '🔍'; 
-        position: absolute;
-        left: 15px; // Відсовуємо від лівого краю
-        font-size: 16px;
-        pointer-events: none; // Важливо: щоб лупа не блокувала клік по інпуту
-    }
 
     input {
         width: 100%; 
@@ -79,9 +79,16 @@
         border: none;
         background-color: #2b2b2b; 
         color: white;
+        font-size: 1.4rem;
 
-        padding: 0 15px 0 45px; 
+        padding: 4.5px 15px 0 45px; 
         outline: none;
+        &::placeholder {
+           font-size: 1.4rem;
+
+          color: #ccc; 
+  
+       }
 
     }
     
@@ -209,9 +216,11 @@ main {
 
 }
 .genre-item{
-    display: block; 
+   display: flex;
+  align-items: center;
         text-decoration: none;
         padding: 10px 15px; 
+        gap: 7px;
         color: white;
         &:hover {
                 background-color: #3d3d3d; 
@@ -254,7 +263,7 @@ main {
     overflow: hidden;       // Обрізаємо все, що не влазить
     text-overflow: ellipsis; // Додаємо багатокрапку
     margin-top: 10px;
-    font-size: 1rem;
+    font-size: 1.3rem;
      padding: 0px 5px;
   }
 
@@ -314,8 +323,9 @@ main {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 28px;
+  
   padding-left: 6px;
+  padding-top: 3px;
       transition: transform 0.3s ease;
 
     &:hover {
@@ -325,9 +335,12 @@ main {
 
 @media (max-width: 608px) {
   // Ховаємо ::before лупу бо тепер є кнопка
-  .Input::before {
-    display: none;
-  }
+  .searchIcon1 {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+  display: none;
+}
 
   .searchToggle {
     display: block; // ← показуємо кнопку
@@ -351,4 +364,10 @@ main {
   
     }
   }
+}
+.List_Book{
+  gap: 5px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
 }
