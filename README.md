@@ -2,8 +2,8 @@
 
 > Сайт для пошуку та відстеження аніме з використанням публічного Jikan API
 
-![alt text](image.png)
-![alt text](image-1.png)
+![alt text](my-anime-app/image.png)
+![alt text](my-anime-app/image-1.png)
 
 ---
 
