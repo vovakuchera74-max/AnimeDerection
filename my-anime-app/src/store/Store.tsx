@@ -18,5 +18,6 @@ export const useAnimeStore = create<AnimeState>((set)=>({
   setIsDark:()=>set({ selectedGenre: 10 }),
   searchTerm: '',
   setSearchTerm: (term) => set({ searchTerm: term }),
-
+ 
+  
 }))
