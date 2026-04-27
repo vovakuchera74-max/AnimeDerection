@@ -138,8 +138,8 @@ const handleWah = async () => {
   <span className={s.genresList}>
     {data?.genres?.map((genre, index) => (
       <span key={index} className={s.genreTag} onClick={() => {
-      setGenre(genre.mal_id); // Передаємо ID жанру
-      navigate('/');          // Переходимо на головну
+      setGenre(genre.mal_id); 
+      navigate('/');          
     }}>
         {genre.name}
       </span>

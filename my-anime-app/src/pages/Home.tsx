@@ -30,7 +30,7 @@ export const Home = () => {
   staleTime: 1000 * 60 * 5,
 });
 
-  // Налаштовуємо бібліотеку
+ 
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
@@ -46,8 +46,7 @@ console.log(data)
   if (isLoading) return <Loader />;
   if (isError) return <div style={{ textAlign: 'center', padding: '50px' }}>Помилка з з'єднанням</div>;
 
-  // Витягуємо всі аніме в один масив
-  // Додаємо захист (data?.pages || []), щоб flatMap не ламався
+ 
   const allAnime = data?.pages.flatMap((page) => page) || [];
 
   return (
@@ -59,7 +58,7 @@ console.log(data)
 
           return (
             <div 
-              key={`${anime.mal_id}-${index}`} // Додав index до key для надійності
+              key={`${anime.mal_id}-${index}`} 
               ref={isLast ? ref : null}
             >
               <AnimeCard anime={anime} />

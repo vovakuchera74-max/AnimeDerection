@@ -1,4 +1,4 @@
-// components/LibraryCard.tsx
+
 import { Star } from 'lucide-react';
 import type { Anime } from '../types/anime.types';
 import s from "../styles/LivraryCard.module.scss";

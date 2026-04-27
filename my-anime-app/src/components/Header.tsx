@@ -43,12 +43,12 @@ const toggleGenres = () => {
 
 <div className="header-actions">
             <div className="dropdown-container">
-  {/* Додаємо клік на кнопку */}
+  
   <button onClick={toggleGenres} className="nav-btn2">
     Filter 
   </button>
 
-  {/* Показуємо список тільки якщо isOpen === true */}
+  
   {isGenresOpen && (
    <ul className="dropdown-menu">
     <li><span onClick={() => { setGenre(null); setIsGenresOpen(false); }} className={`genre-item ${selectedGenre === null ? 'active' : ''}`}><LayoutGrid size={16} /> All</span></li>
@@ -78,12 +78,12 @@ const toggleGenres = () => {
 
 
             <div className="dropdown-container">
-  {/* Додаємо клік на кнопку */}
+ 
   <button onClick={toggleDropdown} className="nav-btn">
     |||
   </button>
 
-  {/* Показуємо список тільки якщо isOpen === true */}
+  
   {isOpen && (
     <ul className="dropdown-menu">
       <li>

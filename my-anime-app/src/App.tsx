@@ -9,12 +9,12 @@ import { useAnimeStore } from "./store/Store.tsx";
 export default function App() {
   const isDark = useAnimeStore((state) => state.isDark);
   
-  // Функція для зміни теми
+  
   
 
   return (
     <div className={`app-wrapper ${isDark ? 'dark' : 'light'}`}>
-      {/* Передаємо функцію зміни теми в Header */}
+     
       <Header  />
 
       <main>

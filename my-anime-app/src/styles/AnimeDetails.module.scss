@@ -23,7 +23,7 @@
 
 }
 .animePoster{
-     width: 100%;      // ← було 300px, тепер розтягується на весь блок
+     width: 100%;   
   height: 100%;
      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     
@@ -52,8 +52,8 @@
     transition: transform 0.2s, background-color 0.2s;
 
     &:hover {
-        background-color: #ff4d4f; // Наприклад, червоний для сердечка
-        transform: scale(1.1); // Легке збільшення
+        background-color: #ff4d4f;
+        transform: scale(1.1);
     }
 }
 .animeMainTitle{
@@ -61,10 +61,10 @@
 }
 .infoGridContainer {
   display: grid;
-  // Якщо хочеш 2fr і 1fr, просто запиши це сюди:
+  
   grid-template-columns: 2fr 1fr; 
-  gap: 30px; // Відстань між блоками
-  align-items: start; // Щоб блоки не розтягувалися по висоті, якщо в одному менше тексту
+  gap: 30px;
+  align-items: start;
   padding: 0 0 30px 0;
 }
 .ratingContainer{
@@ -74,17 +74,17 @@
    
 }
 .scoreValue {
-  font-size: 26px;     // Підженіть під розмір іконки (у нас іконка 24px)
-  font-weight: 700;    // Жирний шрифт робить цифру "масивнішою"
-  line-height: 1;      // Прибирає зайві відступи зверху/знизу шрифту
+  font-size: 26px;    
+  font-weight: 700;   
+  line-height: 1;     
  
 }
 .starsWrapper {
   display: flex;
-  align-items: center; // Центруємо самі зірки всередині контейнера
+  align-items: center; 
   
   svg {
-    display: block; // Важливо! Прибирає невидимий "флет", який іноді додають іконки
+    display: block; 
   }
 }
 .infoLeft{
@@ -92,12 +92,12 @@
     line-height: 1.5;
 }
 .blockTitle{
-  border-left: 4px solid #4a90e2; // Синя риска збоку додає стилю
+  border-left: 4px solid #4a90e2; 
   padding-left: 15px;
   font-size: 22px;
 }
 .sectionTitle{
-     border-left: 4px solid #4a90e2; // Синя риска збоку додає стилю
+     border-left: 4px solid #4a90e2;
   padding-left: 15px;
   font-size: 22px;
   line-height: 1.6;
@@ -107,7 +107,7 @@
     padding-top: 15px;
     text-align:justify;
     font-size: 18px;
-     word-break: break-word; // ← довгі слова переносяться
+     word-break: break-word;
   overflow-wrap: break-word;
 }
 .videoSection{
@@ -118,13 +118,13 @@
 .videoContainer {
   margin-top:15px ;
   width: 100%;
-  aspect-ratio: 16 / 9; // Це стандарт для відео, він сам тримає пропорцію
+  aspect-ratio: 16 / 9; 
 }
 
 .videoIframe {
   width: 100%;
-  height: 100%; // Обов'язково додайте, щоб iframe заповнив контейнер
-  border-radius: 12px; // Щоб краї не були гострими, як на макеті
+  height: 100%; 
+  border-radius: 12px;
   border: none;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
@@ -141,7 +141,7 @@
 }
 .genreTag{
    
-    padding: 0 7px;           // Трохи більше "дихання" всередині
+    padding: 0 7px;         
     margin-right: 8px;
     border-radius: 10px;
     margin-bottom: 5px;
@@ -155,10 +155,10 @@
 
     }
 }
-// Планшет — Rating іде під Information
+
 @media (max-width: 950px) {
   .infoGridContainer {
-    grid-template-columns: 1fr; // ← один під одним
+    grid-template-columns: 1fr; 
   }
 }
 
@@ -167,12 +167,12 @@
 }
 
 @media (max-width: 800px) {
-  // Ховаємо оригінальний
+  
   .opsBloc {
     display: none;
   }
 
-  // Показуємо мобільний
+ 
   .opsBlocMobile {
     display: block;
     grid-column: 1 / -1;
@@ -192,15 +192,15 @@
 
   .imgWithFawPlan {
    
-    margin: 0 auto;  // ← по центру
+    margin: 0 auto;  
   }
   
 }.animeInfoSection {
-  min-width: 0; // ← текст не вилазить за межі grid колонки
+  min-width: 0;
   overflow: hidden;
 }
 .genresList {
   display: flex;
-  flex-wrap: wrap; // ← переносить жанри на новий рядок
+  flex-wrap: wrap; 
 
 }

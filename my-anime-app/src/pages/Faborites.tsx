@@ -27,7 +27,7 @@ export const FavoriteWatchlist = ()=>{
 };
 
 const { data, isLoading, isError } = useQuery({
-    queryKey: ['library'], // Один ключ для всієї "бібліотеки"
+    queryKey: ['library'],
     queryFn: async () => fetchFavoriteWatchlist()
 });
 if (isLoading) return <Loader />;

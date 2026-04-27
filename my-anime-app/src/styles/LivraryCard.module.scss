@@ -1,6 +1,6 @@
 .card {
   display: grid;
-  grid-template-columns: auto 1fr auto; // ← img | info | rating
+  grid-template-columns: auto 1fr auto; 
   align-items: center;
   gap: 12px;
   padding: 8px;
@@ -11,7 +11,7 @@
 
     &:hover {
         
-        transform: scale(1.07); // Легке збільшення
+        transform: scale(1.07); 
     }
 }
 
@@ -24,7 +24,7 @@
 
 .info {
   display: flex;
-  flex-direction: column; // ← назва зверху, серії знизу
+  flex-direction: column;
   gap: 7px;
   min-width: 0;
 }
@@ -33,9 +33,9 @@
   color: white;
   font-size: 20px;
   font-weight: 500;
-  white-space: nowrap;     // ← не переносить на новий рядок
-  overflow: hidden;        // ← обрізає текст
-  text-overflow: ellipsis; // ← додає "..." в кінці
+  white-space: nowrap;   
+  overflow: hidden;       
+  text-overflow: ellipsis;
 }
 
 .episodes {
@@ -45,7 +45,7 @@
 
 .rating {
   display: flex;
-  flex-direction: column; // ← зірка зверху, цифра знизу
+  flex-direction: column; 
   align-items: center;
   gap: 10px;
 }
