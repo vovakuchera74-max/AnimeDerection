@@ -17,16 +17,29 @@ export interface HeaderProps {
   isDark:boolean
   changeTheme:()=>void
 }
-// Він автоматично включає все, що є в Anime + нові поля
+
 export interface FullAnime extends Anime {
-  synopsis: string;        // Опис
-  background: string;      // Історія створення
-  status: string;          // Статус (Ongoing, Finished)
-  rating: string;          // Віковий рейтинг (R-17+, PG-13)
- genres: { mal_id: number; name: string }[]; // Масив жанрів
-  studios: { name: string }[]; // Студії
+  synopsis: string;        
+  background: string;      
+  status: string;         
+  rating: string;         
+ genres: { mal_id: number; name: string }[]; 
+  studios: { name: string }[]; 
   trailer: {
     url: string;
     embed_url: string;
   };
+}
+export interface BaseAnime {
+    mal_id: number;
+    title: string;
+    episodes: number | null;
+    score: number | null;
+  
+    image?: {
+        jpg: { image_url: string; large_image_url: string };
+    };
+    images?: {
+        jpg: { image_url: string; large_image_url: string };
+    };
 }

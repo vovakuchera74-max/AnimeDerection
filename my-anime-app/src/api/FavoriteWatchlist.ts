@@ -1,91 +1,77 @@
+import { supabase } from './supabase';
+import type { BaseAnime } from "../types/anime.types.ts"
 
-interface ANIME{
-  mal_id: number,
-      title: string,
-      episodes: number,
-      id?: number;
-      score: number,
-      images: {
-    jpg: {
-      large_image_url:string;
-      image_url: string;
-    };
-  }
-}
-
-// Тепер
-const BASE_URL = import.meta.env.VITE_API_URL;
 export const Favorites = {
-  async add(anime: ANIME) {
-    // Спочатку перевіряємо чи вже є
-    const exists = await this.isAdded(anime.mal_id);
-    if (exists) return false; // ← виходимо, не додаємо двічі
-
-    const response = await fetch(`${BASE_URL}/favorites`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(anime),
-    });
-    return response.ok;
+  async add(anime: BaseAnime) {
+    const { error } = await supabase
+      .from('favorites')
+      .insert([{ 
+        mal_id: anime.mal_id,
+        title: anime.title,
+        episodes: anime.episodes,
+        score: anime.score,
+        image: anime.images 
+      }]);
+    
+    return !error;
   },
 
-  async remove(id: number) {
-    // Знаходимо запис по mal_id щоб дістати id в json-server
-    const all = await this.getAll();
-    const record = all.find((item: ANIME) => item.mal_id === id);
-    if (!record) return false; // ← нема що видаляти
-
-    const response = await fetch(`${BASE_URL}/favorites/${record.id}`, {
-      method: 'DELETE',
-    });
-    return response.ok;
+  async remove(mal_id: number) {
+    const { error } = await supabase
+      .from('favorites')
+      .delete()
+      .eq('mal_id', mal_id); 
+    
+    return !error;
   },
 
-  async getAll() {
-    const response = await fetch(`${BASE_URL}/favorites`);
-    return response.json();
-  },
-
-  // Перевірка — є чи нема
   async isAdded(mal_id: number): Promise<boolean> {
-    const all = await this.getAll();
-    return all.some((item: ANIME) => item.mal_id === mal_id);
+    const { data} = await supabase
+      .from('favorites')
+      .select('mal_id')
+      .eq('mal_id', mal_id)
+      .single();
+    
+    return !!data;
   }
 };
+
+
 export const Watchlist = {
-  async add(anime: ANIME) {
-    // Спочатку перевіряємо чи вже є
-    const exists = await this.isAdded(anime.mal_id);
-    if (exists) return false; // ← виходимо, не додаємо двічі
-
-    const response = await fetch(`${BASE_URL}/watchlist`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(anime),
-    });
-    return response.ok;
+  async add(anime: BaseAnime) {
+    const { error } = await supabase
+      .from('watchlist') 
+      .insert([{ 
+        mal_id: anime.mal_id,
+        title: anime.title,
+        episodes: anime.episodes,
+        score: anime.score,
+        image: anime.images 
+      }]);
+    
+    if (error) {
+      console.error('Помилка додавання в Watchlist:', error.message);
+      return false;
+    }
+    return true;
   },
 
-  async remove(id: number) {
-    // Знаходимо запис по mal_id щоб дістати id в json-server
-    const all = await this.getAll();
-    const record = all.find((item: ANIME) => item.mal_id === id);
-    if (!record) return false; // ← нема що видаляти
-
-    const response = await fetch(`${BASE_URL}/watchlist/${record.id}`, {
-      method: 'DELETE',
-    });
-    return response.ok;
+  async remove(mal_id: number) {
+    const { error } = await supabase
+      .from('watchlist')
+      .delete()
+      .eq('mal_id', mal_id);
+    
+    return !error;
   },
 
-  async getAll() {
-    const response = await fetch(`${BASE_URL}/watchlist`);
-    return response.json();
-  },
-
-  // Перевірка — є чи нема
   async isAdded(mal_id: number): Promise<boolean> {
-    const all = await this.getAll();
-    return all.some((item: ANIME) => item.mal_id === mal_id);
+    const { data } = await supabase
+      .from('watchlist')
+      .select('mal_id')
+      .eq('mal_id', mal_id)
+      .maybeSingle(); 
+    
+    return !!data;
   }
 };
