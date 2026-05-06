@@ -1,40 +1,26 @@
 import type { Anime } from "../types/anime.types";
 import type { FullAnime } from "../types/anime.types";
-const BASE_URL = "https://api.jikan.moe/v4";
+import {httpGet} from "./http"
 export const fetchTopAnime = async (
-  genreId: number | null, 
-  pageParam: number = 1, 
+  genreId: number | null,
+  pageParam: number = 1,
   search: string = ""
 ): Promise<Anime[]> => {
-  let url = '';
-  // Якщо є пошуковий запит - він має найвищий пріоритет
+  
+  // тільки логіка URL — більше нічого
+  let endpoint = '';
   if (search.trim().length > 0) {
-    url = `${BASE_URL}/anime?q=${search}&page=${pageParam}&limit=20`;
-  } 
-  // Якщо пошуку немає, але обрано жанр (твій робочий код)
-  else if (genreId !== null) {
-    url = `${BASE_URL}/anime?genres=${genreId}&limit=20&page=${pageParam}`;
-  } 
-  // Просто топ (твій робочий код)
-  else {
-    url = `${BASE_URL}/top/anime?limit=20&page=${pageParam}`;
+    endpoint = `/anime?q=${search}&page=${pageParam}&limit=20`;
+  } else if (genreId !== null) {
+    endpoint = `/anime?genres=${genreId}&limit=20&page=${pageParam}`;
+  } else {
+    endpoint = `/top/anime?limit=20&page=${pageParam}`;
   }
 
-  const response = await fetch(url);
-  
-  // Якщо сервер видає 429 (багато запитів) або 504 - ми просто кидаємо помилку
-  if (!response.ok) throw new Error(`Помилка API: ${response.status}`);
-  
-  const result = await response.json();
-  return result.data;
-};
+  return httpGet<Anime[]>(endpoint) // ← fetch/json/перевірка — в httpGet
+}
 export const fetchALLAnime = async (id:number): Promise<FullAnime> => {
   
+  return httpGet<FullAnime>(`/anime/${id}/full`)
 
-  const response = await fetch(`${BASE_URL}/anime/${id}/full`);
-  
-  // Якщо сервер видає 429 (багато запитів) або 504 - ми просто кидаємо помилку
-  if (!response.ok) throw new Error(`Помилка API: ${response.status}`);
-  const result = await response.json();
-  return result.data;
 };

@@ -28,6 +28,8 @@ export const Home = () => {
     return lastPage.length < 20 ? undefined : allPages.length + 1;
   },
   staleTime: 1000 * 60 * 5,
+   retry: 3,
+   retryDelay: 1000,
 });
 
  
@@ -35,7 +37,7 @@ export const Home = () => {
     threshold: 0.1,
   });
 console.log(data)
-  // Викликаємо наступну сторінку, коли бачимо останню картку
+ 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
