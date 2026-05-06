@@ -1,19 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery,useMutation,useQueryClient  } from "@tanstack/react-query";
 import { fetchALLAnime } from "../api/jikanApi";
 import { Loader } from "../components/Loader.tsx"; 
 import s from '../styles/AnimeDetails.module.scss';
 import { Heart,List,Tv, Clock, Star, BookOpen, Hash } from 'lucide-react';
 import { useAnimeStore } from "../store/animeStore.tsx";
 import { useNavigate } from "react-router-dom";
-import { useState,useEffect } from "react";
 import { Favorites,Watchlist } from "../api/FavoriteWatchlist";
 export const AnimeDetails = () => {
 
 
-  const [isFav, setIsFav] = useState(false);
-  const [isWah, setIsWah] = useState(false);
-  
+  const client = useQueryClient()
   const navigate = useNavigate()
   const setGenre = useAnimeStore((state) => state.setGenre);
     const { id } = useParams<{ id: string }>();
@@ -23,54 +20,51 @@ export const AnimeDetails = () => {
         queryFn: () => fetchALLAnime(Number(id)),
         enabled: !!id && !isNaN(Number(id)),
     });
-    useEffect(() => {
-  if (data?.mal_id) {
-    Favorites.isAdded(data.mal_id).then(setIsFav);
-  }
-}, [data?.mal_id]);
- useEffect(() => {
-  if (data?.mal_id) {
-    Watchlist.isAdded(data.mal_id).then(setIsWah);
-  }
-}, [data?.mal_id]);
 
+const{data:isFav} = useQuery({
+  queryKey:["Favorit",data?.mal_id],
+  queryFn:()=>Favorites.isAdded(data!.mal_id),
+  enabled:!!data?.mal_id
+
+})
+const{data:isWah} = useQuery({
+  queryKey:["Warchlist",data?.mal_id],
+  queryFn:()=>Watchlist.isAdded(data!.mal_id),
+  enabled:!!data?.mal_id
+
+})
+
+    const Fawchenger = useMutation({
+      mutationFn:()=>
+        isFav ? Favorites.remove(data!.mal_id) :  Favorites.add({             
+      mal_id: data!.mal_id,
+      title: data!.title,
+      episodes: data!.episodes,
+      score: data!.score,
+      images: data!.images,
+    }),
+    onSuccess:()=>{
+      client.invalidateQueries({queryKey:["Favorit",data?.mal_id]})
+    }
+    })
+       const Watchchenger = useMutation({
+      mutationFn:()=>
+        isWah ? Watchlist.remove(data!.mal_id) :  Watchlist.add({             
+      mal_id: data!.mal_id,
+      title: data!.title,
+      episodes: data!.episodes,
+      score: data!.score,
+      images: data!.images,
+    }),
+    onSuccess:()=>{
+      client.invalidateQueries({queryKey:["Warchlist",data?.mal_id]})
+    }
+    })
+    
+  
     if (isLoading) return <Loader />;
     if (isError) return <div className={s.errorMessage}>Помилка з'єднання</div>;
-    
-const handleFav = async () => {
-  if (!data) return;
 
-  if (isFav) {
-    await Favorites.remove(data.mal_id); 
-  } else {
-    await Favorites.add({             
-      mal_id: data.mal_id,
-      title: data.title,
-      episodes: data.episodes,
-      score: data.score,
-      images: data.images,
-    });
-  }
-
-  setIsFav(!isFav);
-};
-const handleWah = async () => {
-  if (!data) return;
-
-  if (isWah) {
-    await Watchlist.remove(data.mal_id); 
-  } else {
-    await Watchlist.add({               
-      mal_id: data.mal_id,
-      title: data.title,
-      episodes: data.episodes,
-      score: data.score,
-      images: data.images,
-    });
-  }
-
-  setIsWah(!isWah); 
-};
     return (
         <div className={s.animeDetailsPage}>
             <h1 className={s.animeMainTitle}>{data?.title}</h1>
@@ -87,14 +81,14 @@ const handleWah = async () => {
                     </div>
                     
                    <div className={s.fawPlan}>
-    <button className={s.btnFaw} onClick={handleFav} title="Додати в улюблене">
+    <button className={s.btnFaw} onClick={()=>Fawchenger.mutate()} title="Додати в улюблене">
   <Heart
     size={20}
     fill={isFav ? "red" : "transparent"} // ← заповнене або порожнє
     color={isFav ? "red" : "white"}       // ← колір обводки
   />
 </button>
-    <button className={s.btnPlan} onClick={handleWah} title="Додати в плани">
+    <button className={s.btnPlan} onClick={()=>Watchchenger.mutate()} title="Додати в плани">
         <List
     size={20}
     fill={isWah ? "#4a90e2" : "transparent"} // ← синій або прозорий
