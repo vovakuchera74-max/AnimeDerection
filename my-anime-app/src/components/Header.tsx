@@ -3,8 +3,8 @@ import logo from '../assets/logo.png';
 import smallogo from "../assets/smallog.png"
 import '../styles/index.scss';
 import { useState } from 'react';
-import { useAnimeStore } from "../store/Store.tsx";
-import { Search1 } from "./Search.tsx";
+import { useAnimeStore } from "../store/animeStore.tsx";
+import { Search1 } from "./SearchInput.tsx";
 import { Sword, Wand2, Drama , Cpu, Wine,LayoutGrid,BookMarked } from 'lucide-react';
 
 

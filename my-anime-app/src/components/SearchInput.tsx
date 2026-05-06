@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAnimeStore } from '../store/Store';
+import { useAnimeStore } from '../store/animeStore';
 import { Search } from 'lucide-react';
 
 export const Search1 = () => {

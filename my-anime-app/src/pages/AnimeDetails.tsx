@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchALLAnime } from "../api/jikanApi";
-import { Loader } from "../components/Loder"; 
+import { Loader } from "../components/Loader.tsx"; 
 import s from '../styles/AnimeDetails.module.scss';
 import { Heart,List,Tv, Clock, Star, BookOpen, Hash } from 'lucide-react';
-import { useAnimeStore } from "../store/Store.tsx";
+import { useAnimeStore } from "../store/animeStore.tsx";
 import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 import { Favorites,Watchlist } from "../api/FavoriteWatchlist";

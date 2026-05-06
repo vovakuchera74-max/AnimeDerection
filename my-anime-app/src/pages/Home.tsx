@@ -1,11 +1,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchTopAnime } from '../api/jikanApi';
-import { useAnimeStore } from '../store/Store';
+import { useAnimeStore } from '../store/animeStore';
 import type { Anime } from '../types/anime.types';
 import { AnimeCard } from '../components/AnimeCard';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import { Loader } from '../components/Loder';
+import { Loader } from '../components/Loader';
 import { useDebounce } from '../hooks/useDebounce';
 export const Home = () => {
 

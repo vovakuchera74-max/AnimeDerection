@@ -1,6 +1,6 @@
 import s from '../styles/FavoriteWatchlist.module.scss'
 import { useQuery } from '@tanstack/react-query';
-import { Loader } from '../components/Loder'
+import { Loader } from '../components/Loader'
 import type { Anime } from '../types/anime.types'
 import { LibraryCard } from '../components/LibraryCard';
 import { supabase } from '../api/supabase'; 
