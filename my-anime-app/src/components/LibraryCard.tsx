@@ -1,6 +1,6 @@
 import { Star } from 'lucide-react';
 import type { BaseAnime } from '../types/anime.types';
-import s from '../styles/LivraryCard.module.scss';
+import s from '../styles/LibraryCard.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
