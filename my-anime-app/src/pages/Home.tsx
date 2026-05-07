@@ -8,36 +8,35 @@ import { useEffect } from 'react';
 import { Loader } from '../components/Loader';
 import { useDebounce } from '../hooks/useDebounce';
 export const Home = () => {
-
   const selectedGenre = useAnimeStore((state) => state.selectedGenre);
   const searchTerm = useAnimeStore((state) => state.searchTerm);
-  const debouncedSearch = useDebounce(searchTerm, 500)
+  const debouncedSearch = useDebounce(searchTerm, 500);
 
-  const { 
-  data, 
-  isLoading, 
-  isError, 
-  fetchNextPage, 
-  hasNextPage, 
-  isFetchingNextPage 
-} = useInfiniteQuery({
-  queryKey: ['anime', selectedGenre, debouncedSearch],
-  queryFn: ({ pageParam }) => fetchTopAnime(selectedGenre, pageParam, debouncedSearch),
-  initialPageParam: 1,
-  getNextPageParam: (lastPage, allPages) => {
-    return lastPage.length < 20 ? undefined : allPages.length + 1;
-  },
-  staleTime: 1000 * 60 * 5,
-   retry: 3,
-   retryDelay: 1000,
-});
+  const {
+    data,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['anime', selectedGenre, debouncedSearch],
+    queryFn: ({ pageParam }) =>
+      fetchTopAnime(selectedGenre, pageParam, debouncedSearch),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length < 20 ? undefined : allPages.length + 1;
+    },
+    staleTime: 1000 * 60 * 5,
+    retry: 3,
+    retryDelay: 1000,
+  });
 
- 
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
-console.log(data)
- 
+  console.log(data);
+
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
@@ -46,9 +45,13 @@ console.log(data)
 
   // Якщо вантажиться найперша сторінка
   if (isLoading) return <Loader />;
-  if (isError) return <div style={{ textAlign: 'center', padding: '50px' }}>Помилка з з'єднанням</div>;
+  if (isError)
+    return (
+      <div style={{ textAlign: 'center', padding: '50px' }}>
+        Помилка з з'єднанням
+      </div>
+    );
 
- 
   const allAnime = data?.pages.flatMap((page) => page) || [];
 
   return (
@@ -59,10 +62,7 @@ console.log(data)
           const isLast = allAnime.length === index + 1;
 
           return (
-            <div 
-              key={`${anime.mal_id}-${index}`} 
-              ref={isLast ? ref : null}
-            >
+            <div key={`${anime.mal_id}-${index}`} ref={isLast ? ref : null}>
               <AnimeCard anime={anime} />
             </div>
           );
@@ -71,10 +71,17 @@ console.log(data)
 
       {/* Показуємо, коли довантажуємо наступні сторінки */}
       {isFetchingNextPage && (
-  <div style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <Loader />
-  </div>
-)}
+        <div
+          style={{
+            height: '100px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };
