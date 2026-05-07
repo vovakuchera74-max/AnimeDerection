@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-import { AnimeCard } from '../components/AnimeCard'
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { AnimeCard } from '../components/AnimeCard';
 
 const mockAnime = {
   mal_id: 1,
@@ -15,7 +15,7 @@ const mockAnime = {
       large_image_url: 'test-large.jpg',
     },
   },
-}
+};
 
 describe('AnimeCard', () => {
   it('рендериться з правильним заголовком', () => {
@@ -23,25 +23,25 @@ describe('AnimeCard', () => {
       <BrowserRouter>
         <AnimeCard anime={mockAnime} />
       </BrowserRouter>
-    )
-    expect(screen.getByText('Naruto')).toBeInTheDocument()
-  })
+    );
+    expect(screen.getByText('Naruto')).toBeInTheDocument();
+  });
 
   it('показує тип аніме', () => {
     render(
       <BrowserRouter>
         <AnimeCard anime={mockAnime} />
       </BrowserRouter>
-    )
-    expect(screen.getByText('TV')).toBeInTheDocument()
-  })
+    );
+    expect(screen.getByText('TV')).toBeInTheDocument();
+  });
 
   it('показує рік', () => {
     render(
       <BrowserRouter>
         <AnimeCard anime={mockAnime} />
       </BrowserRouter>
-    )
-    expect(screen.getByText('2002')).toBeInTheDocument()
-  })
-})
+    );
+    expect(screen.getByText('2002')).toBeInTheDocument();
+  });
+});
