@@ -14,8 +14,10 @@ import {
   LayoutGrid,
   BookMarked,
 } from 'lucide-react';
-
+import { authApi } from '../api/authApi.ts';
 export const Header = () => {
+
+
   const selectedGenre = useAnimeStore((state) => state.selectedGenre);
 
   const setGenre = useAnimeStore((state) => state.setGenre);
@@ -49,6 +51,12 @@ export const Header = () => {
           <button onClick={toggleGenres} className="nav-btn2">
             Filter
           </button>
+
+{/* 
+fdsfsdf */}
+          <button onClick={()=>authApi.signOut()}>exit</button>
+
+{/* dsfsdf */}
 
           {isGenresOpen && (
             <ul className="dropdown-menu">

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-
+import { authApi } from '../api/authApi'
+import { useNavigate } from 'react-router-dom'
 // 1. Створюємо схему Zod (описуємо наші ідеальні дані)
 const signUpSchema = z.object({
   email: z.string().min(1, "Mail is required").email("Invalid mail format"),
@@ -21,17 +22,21 @@ const signUpSchema = z.object({
 type SignUpForm = z.infer<typeof signUpSchema>;
 
 export const Sign_up = () => {
+  const navigate = useNavigate()
   // 3. Підключаємо схему до useForm через zodResolver
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<SignUpForm>({
+  const { register, handleSubmit,  formState: { errors } } = useForm<SignUpForm>({
     resolver: zodResolver(signUpSchema),
     mode: 'onBlur'
   });
 
-  const onSubmit = (data:SignUpForm) => {
-    // Якщо дані дійшли сюди, значить вони 100% пройшли перевірку Zod
-    console.log("Дані валідні! Відправляємо на сервер:", data); 
-    reset(); 
-  };
+   const onSubmit = async (data: SignUpForm) => {
+    try {
+      await authApi.signUp(data.email, data.password, data.username)
+      navigate('/')
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div className={s.auth_container}>
