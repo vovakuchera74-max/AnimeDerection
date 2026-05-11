@@ -35,7 +35,7 @@ export interface BaseAnime {
   title: string;
   episodes: number | null;
   score: number | null;
-  user_id: string;
+  user_id?: string;
 
   image?: {
     jpg: { image_url: string; large_image_url: string };

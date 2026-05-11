@@ -16,10 +16,15 @@ import {
   Wine,
   LayoutGrid,
   BookMarked,
-  User
+  User,
+  Check,X
 } from 'lucide-react';
 import { authApi } from '../api/authApi.ts';
 export const Header = () => {
+
+
+  const [IsChangeNameOpen,setIsChangeNameOpen]=useState(false)
+  const [NewUsername,setNewUsername]=useState("")
 const { user } = useAuth()
 const username = user?.user_metadata?.username
 
@@ -182,10 +187,29 @@ const [isProfileOpen, setIsProfileOpen] = useState(false)
       </div>
       {isProfileOpen && (
   <div className="ProfileMenu">
-    <div className="overlay" onClick={() => setIsProfileOpen(false)} />  {/* ← це */}
+    <div className="overlay" onClick={() =>{ setIsProfileOpen(false);setIsChangeNameOpen(false);}} />  {/* ← це */}
     <div className="ProfileBloc">
       <div className="ProfilePhoto"><img className='PhotoProfile' src={Photo} alt="" /></div>
-      <div className="ProfileName">{username}  <Pencil size={20} onClick={() => {/* логіка пізніше */}} style={{cursor: 'pointer', marginLeft: '8px'}} /></div>
+       {IsChangeNameOpen ?
+        <div className='ChangeName'>
+           <input 
+           className='inputname'
+        type="text"
+        value={NewUsername}
+        onChange={(e) => setNewUsername(e.target.value)}
+        placeholder={username}
+        autoFocus
+      />
+           <button className="btn-confirm" onClick={async () => {
+        await authApi.updateUsername(NewUsername)
+        setIsChangeNameOpen(false)
+      }}><Check size={20} /></button>
+      <button className="btn-cancel" onClick={() => setIsChangeNameOpen(false)}><X size={20} /></button>
+           
+           </div>
+        :
+        <div className="ProfileName">{username}  <Pencil size={20} onClick={() => setIsChangeNameOpen(!IsChangeNameOpen)} style={{cursor: 'pointer', marginLeft: '8px'}} /></div>
+        }
       <div className="LogoutButton">
         <button onClick={() => {
       authApi.signOut()

@@ -399,6 +399,9 @@ main {
 }
 .LogoutButton{
   padding: 15px 0 0 0;
+  &:hover {
+    filter: brightness(0.8);  
+  }
 }
 .LogoutButton button {
   background: #9333ea;
@@ -409,6 +412,7 @@ main {
   padding: 8px 20px;
   border-radius: 8px;
   cursor: pointer;
+  
 }
 .User {
   background: none;
@@ -430,4 +434,58 @@ main {
 .ProfileBloc{
   top: 61px;
 }
+}
+.ChangeName{
+   padding: 15px 8px 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  input{
+    padding:  2px 5px ;
+     width: 100%; 
+  box-sizing: border-box;
+  border: none;
+  background-color: #2b2b2b;
+  color: white;
+  font-size: 1.4rem;
+  border-radius: 10px;
+    &:focus{
+      outline: 2px solid #a855f7; 
+
+    }
+ 
+  }
+}
+.btn-confirm {
+  margin: 0 0 0 3px;
+  background-color: #22c55e;
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;  
+  
+  &:hover {
+    filter: brightness(0.8);  
+  }
+}
+
+.btn-cancel {
+  background-color: #ef4444;
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white; 
+  
+  &:hover {
+    filter: brightness(0.8);
+  }
 }

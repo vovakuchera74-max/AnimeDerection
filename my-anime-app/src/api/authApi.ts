@@ -30,4 +30,11 @@ export const authApi = {
     const { data } = await supabase.auth.getUser()
     return data.user
   },
+  async updateUsername(username: string) {
+  const { data, error } = await supabase.auth.updateUser({
+    data: { username }
+  })
+  if (error) throw new Error(error.message)
+  return data
+},
 }
