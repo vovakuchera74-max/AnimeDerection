@@ -172,7 +172,7 @@ const [isProfileOpen, setIsProfileOpen] = useState(false)
               </li>
                             <li>
                 <Link
-                  to="/FavoriteWatchlist"
+                  to="/Tierlist"
                   className="List_Book"
                   onClick={() => setIsOpen(false)}
                 >

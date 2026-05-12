@@ -9,6 +9,7 @@ import { Sign_up } from './components/Sign_up.tsx';
 import { Loader } from './components/Loader.tsx';
 import { useAuth } from './hooks/useAuth.ts';
 import { Navigate } from 'react-router-dom';
+import { Tierlist } from './pages/TierList.tsx';
 export default function App() {
   const isDark = useAnimeStore((state) => state.isDark);
 const { user, loading } = useAuth()
@@ -34,6 +35,7 @@ if (loading) return <Loader />  // поки перевіряємо сесію
         <Route path="/" element={<Home />} />
         <Route path="/anime/:id" element={<AnimeDetails />} />
         <Route path="/FavoriteWatchlist" element={<FavoriteWatchlist />} />
+         <Route path="/Tierlist" element={<Tierlist />} />
         <Route path="*" element={<Navigate to="/" />} /> {/* будь-який інший шлях → головна */}
       </>
     )}
