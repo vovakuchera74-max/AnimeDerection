@@ -17,7 +17,7 @@ import {
   LayoutGrid,
   BookMarked,
   User,
-  Check,X
+  Check,X,BarChart3
 } from 'lucide-react';
 import { authApi } from '../api/authApi.ts';
 export const Header = () => {
@@ -169,6 +169,16 @@ const [isProfileOpen, setIsProfileOpen] = useState(false)
                 >
                   <User size={22} />Account
                 </button>
+              </li>
+                            <li>
+                <Link
+                  to="/FavoriteWatchlist"
+                  className="List_Book"
+                  onClick={() => setIsOpen(false)}
+                >
+                 
+                  <BarChart3 size={18} /> Tierlist
+                </Link>
               </li>
               <li className="mobile-only">
                 <div className="theme-toggle-track" onClick={toggleTheme}>
