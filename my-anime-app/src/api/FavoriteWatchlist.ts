@@ -3,7 +3,9 @@ import type { BaseAnime } from '../types/anime.types.ts';
 
 export const Favorites = {
   async add(anime: BaseAnime) {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const { error } = await supabase.from('favorites').insert([
       {
         user_id: user?.id,
@@ -19,7 +21,9 @@ export const Favorites = {
   },
 
   async remove(mal_id: number) {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const { error } = await supabase
       .from('favorites')
       .delete()
@@ -30,7 +34,9 @@ export const Favorites = {
   },
 
   async isAdded(mal_id: number): Promise<boolean> {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const { data } = await supabase
       .from('favorites')
       .select('mal_id')
@@ -44,10 +50,12 @@ export const Favorites = {
 
 export const Watchlist = {
   async add(anime: BaseAnime) {
-     const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const { error } = await supabase.from('watchlist').insert([
       {
-         user_id: user?.id,
+        user_id: user?.id,
         mal_id: anime.mal_id,
         title: anime.title,
         episodes: anime.episodes,
@@ -64,7 +72,9 @@ export const Watchlist = {
   },
 
   async remove(mal_id: number) {
-     const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const { error } = await supabase
       .from('watchlist')
       .delete()
@@ -75,7 +85,9 @@ export const Watchlist = {
   },
 
   async isAdded(mal_id: number): Promise<boolean> {
-     const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     const { data } = await supabase
       .from('watchlist')
       .select('mal_id')

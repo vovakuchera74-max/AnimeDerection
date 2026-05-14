@@ -12,34 +12,37 @@ import { Navigate } from 'react-router-dom';
 import { Tierlist } from './pages/TierList.tsx';
 export default function App() {
   const isDark = useAnimeStore((state) => state.isDark);
-const { user, loading } = useAuth()
+  const { user, loading } = useAuth();
 
-if (loading) return <Loader />  // поки перевіряємо сесію
+  if (loading) return <Loader />; // поки перевіряємо сесію
 
   return (
     <div className={`app-wrapper ${isDark ? 'dark' : 'light'}`}>
-      {user?<Header />:null}
+      {user ? <Header /> : null}
 
       <main>
         <Routes>
-    {!user ? (
-     
-      <>
-        <Route path="/signup" element={<Sign_up />} />
-        <Route path="/signin" element={<Sign_in />} />
-        <Route path="*" element={<Navigate to="/signin" />} /> {/* будь-який інший шлях → signin */}
-      </>
-    ) : (
-      
-      <>
-        <Route path="/" element={<Home />} />
-        <Route path="/anime/:id" element={<AnimeDetails />} />
-        <Route path="/FavoriteWatchlist" element={<FavoriteWatchlist />} />
-         <Route path="/Tierlist" element={<Tierlist />} />
-        <Route path="*" element={<Navigate to="/" />} /> {/* будь-який інший шлях → головна */}
-      </>
-    )}
-  </Routes>
+          {!user ? (
+            <>
+              <Route path="/signup" element={<Sign_up />} />
+              <Route path="/signin" element={<Sign_in />} />
+              <Route path="*" element={<Navigate to="/signin" />} />{' '}
+              {/* будь-який інший шлях → signin */}
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/anime/:id" element={<AnimeDetails />} />
+              <Route
+                path="/FavoriteWatchlist"
+                element={<FavoriteWatchlist />}
+              />
+              <Route path="/Tierlist" element={<Tierlist />} />
+              <Route path="*" element={<Navigate to="/" />} />{' '}
+              {/* будь-який інший шлях → головна */}
+            </>
+          )}
+        </Routes>
       </main>
     </div>
   );

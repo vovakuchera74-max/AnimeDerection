@@ -369,38 +369,41 @@ main {
   height: 300px;
   right: 0;
   width: 200px;
-  
+
   background: #1f1f1f;
   display: flex;
   align-items: center;
   padding: 70px 0 0 0;
   flex-direction: column;
-   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); // Тінь, щоб відділити від контенту
-   animation: slideIn 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); // Тінь, щоб відділити від контенту
+  animation: slideIn 0.3s ease;
 }
 @keyframes slideIn {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
-.PhotoProfile{
+.PhotoProfile {
   border-radius: 50%;
   width: 120px;
   height: 120px;
-   object-fit: contain;
-  
+  object-fit: contain;
 }
-.ProfileName{
+.ProfileName {
   padding: 15px 0 0 0;
   font-size: 25px;
   font-weight: 600;
   display: flex;
-  
+
   align-items: center;
 }
-.LogoutButton{
+.LogoutButton {
   padding: 15px 0 0 0;
   &:hover {
-    filter: brightness(0.8);  
+    filter: brightness(0.8);
   }
 }
 .LogoutButton button {
@@ -412,7 +415,6 @@ main {
   padding: 8px 20px;
   border-radius: 8px;
   cursor: pointer;
-  
 }
 .User {
   background: none;
@@ -426,35 +428,33 @@ main {
   color: white;
   gap: 3px;
   font-size: 18px;
-   &:hover {
-          background-color: #3d3d3d;
-        }
+  &:hover {
+    background-color: #3d3d3d;
+  }
 }
-@media(max-width: 458px){
-.ProfileBloc{
-  top: 61px;
+@media (max-width: 458px) {
+  .ProfileBloc {
+    top: 61px;
+  }
 }
-}
-.ChangeName{
-   padding: 15px 8px 0 8px;
+.ChangeName {
+  padding: 15px 8px 0 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  input{
-    padding:  2px 5px ;
-     width: 100%; 
-  box-sizing: border-box;
-  border: none;
-  background-color: #2b2b2b;
-  color: white;
-  font-size: 1.4rem;
-  border-radius: 10px;
-    &:focus{
-      outline: 2px solid #a855f7; 
-
+  input {
+    padding: 2px 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background-color: #2b2b2b;
+    color: white;
+    font-size: 1.4rem;
+    border-radius: 10px;
+    &:focus {
+      outline: 2px solid #a855f7;
     }
- 
   }
 }
 .btn-confirm {
@@ -467,10 +467,10 @@ main {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: white;  
-  
+  color: white;
+
   &:hover {
-    filter: brightness(0.8);  
+    filter: brightness(0.8);
   }
 }
 
@@ -483,8 +483,8 @@ main {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: white; 
-  
+  color: white;
+
   &:hover {
     filter: brightness(0.8);
   }
