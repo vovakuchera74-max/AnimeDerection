@@ -1,6 +1,6 @@
-# 爆 BLAST — Anime Explorer
+爆 BLAST — Anime Explorer
 
-> Сайт для пошуку та відстеження аніме з використанням публічного Jikan API
+> Сайт для пошуку, відстеження та оцінювання аніме
 
 ![alt text](image.png)
 ![alt text](image-1.png)
@@ -11,35 +11,39 @@
 
 - 🔍 **Пошук аніме** — миттєвий пошук по назві
 - 🎭 **Фільтрація по жанрах** — Shounen, Isekai, Mecha, Drama, Seinen
-- 📄 **Сторінка аніме** — детальна інформація: опис, рейтинг, жанри, кількість серій, трейлер
+- 📄 **Сторінка аніме** — опис, рейтинг, жанри, трейлер
 - ❤️ **Улюблене** — додавай аніме в список обраних
 - 📋 **Watchlist** — плануй що дивитись
-- 🌙 **Темна/світла тема** — перемикання теми
-- 📱 **Адаптивний дизайн** — працює на всіх екранах
+- 🏆 **Тірліст** — розстав улюблені аніме по рангах (S/A/B/C/D/F)
+- 👤 **Авторизація** — реєстрація та вхід, особистий профіль
+- 🌙 **Темна/світла тема**
+- 📱 **Адаптивний дизайн**
 
 ---
 
 ## 🛠 Стек
 
-| Технологія     | Призначення |
-|----------------|---------------|
-| React 18       | UI бібліотека |
-| TypeScript     | Типізація |
-| Vite           | Збірник проекту |
-| React Router   | Навігація |
-| TanStack Query | Запити до API та кешування |
-| Zustand        | Глобальний стан |
-| SCSS Modules   | Стилізація |
-| Jikan API      | Дані про аніме |
-| JSON Server    | Локальна база даних (обране, watchlist) |
-| Lucide React   | Іконки |
+| Технологія | Призначення |
+|---|---|
+| React 18 | UI бібліотека |
+| TypeScript | Типізація |
+| Vite | Збірник |
+| React Router | Навігація |
+| TanStack Query | Запити та кешування |
+| Zustand | Глобальний стан |
+| SCSS Modules | Стилізація |
+| Supabase | База даних та авторизація |
+| Jikan API | Дані про аніме |
+| @dnd-kit | Drag and drop для тірліста |
+| Zod + React Hook Form | Валідація форм |
+| Lucide React | Іконки |
+| Vitest | Тести |
 
 ---
 
 ## 🚀 Запуск проекту
 
 ### 1. Клонуй репозиторій
-
 ```bash
 git clone https://github.com/vovakuchera74-max/AnimeDerection.git
 cd AnimeDerection/my-anime-app
@@ -47,74 +51,65 @@ npm install
 ```
 
 ### 2. Створи `.env` файл
-
 ```bash
-# Створи файл .env в корені проекту
-VITE_API_URL=http://localhost:3001
+VITE_SUPABASE_URL=твій_supabase_url
+VITE_SUPABASE_ANON_KEY=твій_anon_key
 ```
 
-### 3. Запусти проект
-
-Потрібно запустити **два термінали одночасно**:
-
-**Термінал 1 — JSON Server (база даних):**
+### 3. Запуск
 ```bash
-cd my-anime-app
-npm run server
-```
-
-**Термінал 2 — React додаток:**
-```bash
-cd my-anime-app
 npm run dev
-```
-
-### 4. Відкрий в браузері
-
-```
-http://localhost:5173
 ```
 
 ---
 
 ## 📁 Структура проекту
-
-```
 src/
-├── api/              # Запити до API
-│   ├── jikanApi.ts       # Jikan API
-│   └── FavoriteWatchlist.ts  # JSON Server
-├── components/       # Компоненти
+│  
+└── tests/
+│     └──AnimeCade.test.tsx
+│     └──useDebounce.test,tsx
+├── api/
+│   ├── authApi.ts
+│   ├── FavoriteWatchlist.ts
+│   ├── http.ts
+│   ├── jikanApi.ts
+│   ├── supabase.ts
+│   └── tierlistApi.ts
+├── components/
+│   ├── anime-details/
 │   ├── AnimeCard.tsx
 │   ├── Header.tsx
-│   ├── LibraryCard.tsx
-│   ├── Loader.tsx
-│   └── Search.tsx
-├── pages/            # Сторінки
+│   └── ...
+├── hooks/
+│   ├── useAuth.ts
+│   └── useDebounce.ts
+├── pages/
 │   ├── Home.tsx
 │   ├── AnimeDetails.tsx
-│   └── Faborites.tsx
-├── store/            # Zustand стор
-│   └── Store.tsx
-├── styles/           # SCSS стилі
-├── types/            # TypeScript типи
-│   └── anime.types.ts
-└── hooks/            # Кастомні хуки
-    └── useDebounce.ts
-```
+│   ├── FavoritesPage.tsx
+│   └── TierList.tsx
+├── store/
+│   └── animeStore.tsx
+├── styles/
+├── types/
+    └── anime.types.ts
+
 
 ---
 
 ## 📝 Скрипти
 
 ```bash
-npm run dev      # Запуск React додатку
-npm run server   # Запуск JSON Server
-npm run build    # Збірка для продакшну
+npm run dev      # Запуск
+npm run build    # Збірка
+npm run test     # Тести
+npm run lint     # Лінтинг
+npm run format   # Форматування
 ```
 
 ---
 
 ## 🔗 API
 
-Проект використовує безкоштовний [Jikan API](https://jikan.moe/) — неофіційний MyAnimeList API. Ліміт запитів: 3 запити/сек.
+Використовує [Jikan API](https://jikan.moe/) — неофіційний MyAnimeList API. Ліміт: 3 запити/сек.

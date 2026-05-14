@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { fetchALLAnime } from '../api/jikanApi';
 import { Loader } from '../components/Loader.tsx';
 import s from '../styles/AnimeDetails.module.scss';
-import {  Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { useAnimeStore } from '../store/animeStore.tsx';
 import { useNavigate } from 'react-router-dom';
 import { Favorites, Watchlist } from '../api/FavoriteWatchlist';
