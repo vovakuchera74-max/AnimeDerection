@@ -17,7 +17,6 @@ export const tierlistApi = {
       data: { user },
     } = await supabase.auth.getUser();
 
-    // Перевіряємо чи вже є запис
     const { data: existing } = await supabase
       .from('tierlist')
       .select('id')
@@ -26,10 +25,10 @@ export const tierlistApi = {
       .maybeSingle();
 
     if (existing) {
-      // Оновлюємо існуючий
+     
       await supabase.from('tierlist').update({ tier }).eq('id', existing.id);
     } else {
-      // Створюємо новий
+     
       await supabase
         .from('tierlist')
         .insert([{ mal_id, tier, user_id: user?.id }]);

@@ -24,7 +24,7 @@ export const Sign_in = () => {
     try {
       await authApi.signIn(data.email, data.password);
       navigate('/');
-    } catch (error) {
+    } catch {
       alert('Incorrect email or password. Please try again.');
       reset();
     }

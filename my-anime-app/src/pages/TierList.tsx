@@ -25,25 +25,24 @@ export const Tierlist = () => {
 
   const tierNames = ['S', 'A', 'B', 'C', 'D', 'F'];
 
-  // 2. Головна магія об'єднання двох таблиць
+  
   async function getAll(): Promise<AnimeItem[]> {
-    // Запускаємо обидва запити одночасно, щоб не чекати їх по черзі
+  
     const [favoritesResponse, tierlistResponse] = await Promise.all([
       supabase.from('favorites').select('*'),
-      tierlistApi.getAll(), // Викликаємо твою готову функцію, яка дістає тіри для поточного юзера
+      tierlistApi.getAll(),
     ]);
 
     const favoritesData = favoritesResponse.data || [];
     const tierlistData = tierlistResponse || [];
 
-    // Об'єднуємо: беремо аніме з favorites і додаємо йому tier, якщо він знайшовся в таблиці tierlist
-    const fullData = favoritesData.map((anime: any) => {
+    const fullData = favoritesData.map((anime: AnimeItem) => {
       const savedTier = tierlistData.find(
-        (t: any) => t.mal_id === anime.mal_id
+        (t: AnimeItem) => t.mal_id === anime.mal_id
       );
       return {
         ...anime,
-        tier: savedTier ? savedTier.tier : 'pool', // якщо немає в тірлісті — відправляємо в пул
+        tier: savedTier ? savedTier.tier : 'pool',
       };
     });
 
@@ -55,7 +54,6 @@ export const Tierlist = () => {
     queryFn: () => getAll(),
   });
 
-  // 3. Цей useEffect залишається таким же, але тепер він працює з правильними даними!
   useEffect(() => {
     if (data && data?.length > 0) {
       const initialTiers: Record<string, number[]> = {
@@ -81,18 +79,17 @@ export const Tierlist = () => {
     }
   }, [data]);
 
-  // 1. НАШ НОВИЙ ОБРОБНИК: спрацьовує, коли відпустили картку
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
-    // Якщо кинули повз будь-яку зону — ігноруємо
+    
     if (!over) return;
 
-    const mal_id = Number(active.id); // ID картки, яку тягнули
-    const targetTier = String(over.id); // ID рядка, куди її кинули
+    const mal_id = Number(active.id); 
+    const targetTier = String(over.id); 
 
     setTierItems((prev) => {
-      // Крок А: Пробігаємося по всіх поточних рядках і видаляємо цю картку звідти, де вона була
+      
       const newState = Object.fromEntries(
         Object.entries(prev).map(([key, val]) => [
           key,
@@ -100,7 +97,7 @@ export const Tierlist = () => {
         ])
       );
 
-      // Крок Б: Додаємо картку в масив того рядка, куди її скинули
+     
       newState[targetTier] = [...newState[targetTier], mal_id];
 
       return newState;
@@ -119,9 +116,9 @@ export const Tierlist = () => {
                 {tier}
               </div>
               <div className={s.Animerow}>
-                {/* 1. Додаємо посадкову зону для кожного рядка */}
+             
                 <TierRow tier={tier}>
-                  {/* Рендеримо картки, які належать саме цьому рядку */}
+                 
                   {tierItems[tier].map((mal_id) => {
                     const anime = data?.find((a) => a.mal_id === mal_id);
                     return (
@@ -137,9 +134,9 @@ export const Tierlist = () => {
             </div>
           ))}
 
-          {/* НИЖНІЙ БЛОК (ПУЛ) */}
+         
           <div className={s.AnimePhotosBlock}>
-            {/* 2. Огортаємо пул у таку ж посадкову зону, щоб картки можна було кидати назад */}
+           
             <TierRow tier="pool">
               {tierItems.pool.map((mal_id) => {
                 const anime = data?.find((a) => a.mal_id === mal_id);
