@@ -2,7 +2,8 @@ import s from '../styles/TierList.module.scss';
 import { supabase } from '../api/supabase';
 import { useQuery } from '@tanstack/react-query';
 import { TierListCard } from '../components/TierListCard';
-import { DndContext, type DragEndEvent } from '@dnd-kit/core'; // Додав DragEndEvent
+import { DndContext, type DragEndEvent ,useSensors,MouseSensor,
+  TouchSensor,useSensor} from '@dnd-kit/core'; // Додав DragEndEvent
 import { useState, useEffect } from 'react';
 import { TierRow } from '../components/TierRow';
 import { tierlistApi } from '../api/tierlistApi';
@@ -104,9 +105,18 @@ export const Tierlist = () => {
     });
     tierlistApi.updateTier(mal_id, targetTier);
   };
+  const sensors = useSensors(
+  useSensor(MouseSensor),
+  useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  })
+)
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
       <div className={s.TierlistPAge}>
         <div className={s.TierListBlock}>
           {/* РЯДКИ ТІРЛІСТА */}

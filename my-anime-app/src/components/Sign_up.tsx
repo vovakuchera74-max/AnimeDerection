@@ -38,6 +38,7 @@ export const Sign_up = () => {
   const onSubmit = async (data: SignUpForm) => {
     try {
       await authApi.signUp(data.email, data.password, data.username);
+      alert("Go to your email to confirm your account.")
       navigate('/');
     } catch (error) {
       console.error(error);

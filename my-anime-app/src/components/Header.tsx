@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import smallogo from '../assets/smallog.png';
 import Photo from '../assets/Photo.png';
@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { authApi } from '../api/authApi.ts';
 export const Header = () => {
+  const navigate = useNavigate()
   const [IsChangeNameOpen, setIsChangeNameOpen] = useState(false);
   const [NewUsername, setNewUsername] = useState('');
   const { user } = useAuth();
@@ -71,6 +72,7 @@ export const Header = () => {
                   onClick={() => {
                     setGenre(null);
                     setIsGenresOpen(false);
+                     navigate("/")
                   }}
                   className={`genre-item ${selectedGenre === null ? 'active' : ''}`}
                 >
@@ -82,6 +84,7 @@ export const Header = () => {
                   onClick={() => {
                     setGenre(27);
                     setIsGenresOpen(false);
+                     navigate("/")
                   }}
                   className={`genre-item ${selectedGenre === 27 ? 'active' : ''}`}
                 >
@@ -94,6 +97,7 @@ export const Header = () => {
                   onClick={() => {
                     setGenre(62);
                     setIsGenresOpen(false);
+                     navigate("/")
                   }}
                   className={`genre-item ${selectedGenre === 62 ? 'active' : ''}`}
                 >
@@ -106,6 +110,7 @@ export const Header = () => {
                   onClick={() => {
                     setGenre(18);
                     setIsGenresOpen(false);
+                    navigate("/")
                   }}
                   className={`genre-item ${selectedGenre === 18 ? 'active' : ''}`}
                 >
@@ -118,6 +123,7 @@ export const Header = () => {
                   onClick={() => {
                     setGenre(8);
                     setIsGenresOpen(false);
+                     navigate("/")
                   }}
                   className={`genre-item ${selectedGenre === 8 ? 'active' : ''}`}
                 >
@@ -130,6 +136,7 @@ export const Header = () => {
                   onClick={() => {
                     setGenre(41);
                     setIsGenresOpen(false);
+                     navigate("/")
                   }}
                   className={`genre-item ${selectedGenre === 41 ? 'active' : ''}`}
                 >
